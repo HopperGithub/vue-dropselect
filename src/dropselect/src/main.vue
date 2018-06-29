@@ -1,5 +1,6 @@
 <template>
-    <div class="el-select" v-clickoutside="handleClose">
+    <div class="el-select"
+         v-clickoutside="handleClose">
         <div class="el-select__tags"
              v-if="multiple"
              @click.stop="toggleMenu"
@@ -41,7 +42,8 @@
         <transition name="el-zoom-in-top"
                     @before-enter="handleMenuEnter"
                     @after-leave="doDestroy">
-            <el-select-menu ref="popper" v-show="visible && emptyText !== false">
+            <el-select-menu ref="popper"
+                            v-show="visible && emptyText !== false">
                 <el-input ref="search"
                           style="padding: 8px"
                           type="text"
@@ -59,7 +61,8 @@
                           @keydown.native.esc.stop.prevent="visible = false"
                           @keydown.native.tab="visible = false">
                 </el-input>
-                <div class="el-select-dropdown__menu" v-show="options.length > 0 && !loading && !emptyText">
+                <div class="el-select-dropdown__menu"
+                     v-show="options.length > 0 && !loading && !emptyText">
                     <el-scrollbar tag="ul"
                                   wrap-class="el-select-dropdown__wrap"
                                   view-class="el-select-dropdown__list"
@@ -81,7 +84,8 @@
                             </slot>
                         </el-option>
                     </el-scrollbar>
-                    <div class="el-select-dropdown__pagination" v-else>
+                    <div class="el-select-dropdown__pagination"
+                         v-else>
                         <slot></slot>
                         <el-option v-for="l in list"
                                    :key="l[valueKey]"
@@ -95,13 +99,13 @@
                                   :disabledKey="disabledKey">
                             </slot>
                         </el-option>
-                        <el-pagination
-                                :style="{'padding': '6px 8px', 'text-align': 'center', 'margin-top': marginTop}"
-                                small layout="prev, pager, next"
-                                :page-size="pageLimit"
-                                :total="total"
-                                :current-page.sync="currentPage"
-                                @current-change="currentChange"></el-pagination>
+                        <el-pagination :style="{'padding': '6px 8px', 'text-align': 'center', 'margin-top': marginTop}"
+                                       small
+                                       layout="prev, pager, next"
+                                       :page-size="pageLimit"
+                                       :total="total"
+                                       :current-page.sync="currentPage"
+                                       @current-change="currentChange"></el-pagination>
                     </div>
                 </div>
                 <p class="el-select-dropdown__empty"
@@ -114,7 +118,7 @@
 
 <script>
 /**
- * Dropselect：（更新日志）
+ * DropSelector：（更新日志）
  * 支持两种模式，分页 | 滚动条，为减轻网络、渲染、性能压力推荐使用（分页模式）。
  * 扩展支持场景：（注：以上两种模式均支持以下场景，减少对服务端分页、搜索等功能的依赖）
  *     远程不提供分页的场景；
@@ -123,7 +127,7 @@
  *    （以上场景均可通过 promise 计算分页解决，实现很简单就不举例了呦，设置 remote 为 true 就可以开启本地搜索）
  * 支持远程搜索、本地搜索的搜索功能。
  * 支持键盘选择、删除、控制（多选时，通过Backspace键选中最后一个Tag，Delete键确认移除）
- * 提升性能，Element-UI 1.x 官方已停止维护，Dropselect 结合 Element-UI 2.0 进行了一系列逻辑性能优化。
+ * 提升性能，Element-UI 1.x 官方已停止维护，DropSelector 结合 Element-UI 2.0 进行了一系列逻辑性能优化。
  * （如：优化 change 事件、form 表单验证 change 事件触发时机，
  *      解决Element-UI 2.0 以前的版本，select组件，在option销毁时，
  *      可能发生resetIndex事件频繁 emit 导致 vue-devTool crash 的bug。
@@ -153,15 +157,15 @@
 
 import ElSelectMenu from './menu.vue';
 import ElOption from './option.vue';
-import Emitter from '@/mixins/emitter';
-import Locale from '@/mixins/locale';
-import Clickoutside from '@/utils/clickoutside';
+import Emitter from 'element-ui/src/mixins/emitter';
+import Locale from 'element-ui/src/mixins/locale';
+import Clickoutside from 'element-ui/src/utils/clickoutside';
 import debounce from 'throttle-debounce/debounce';
-import { addClass, removeClass, hasClass } from '@/utils/dom';
-import { addResizeListener, removeResizeListener } from '@/utils/resize-event';
-//    import {t} from '@/utils/locale';
-import scrollIntoView from '@/utils/scroll-into-view';
-import { getValueByPath } from '@/utils/util';
+import { addClass, removeClass, hasClass } from 'element-ui/src/utils/dom';
+import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
+//    import {t} from 'element-ui/src/locale';
+import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
+import { getValueByPath } from 'element-ui/src/utils/util';
 
 const sizeMap = {
     'large': 42,
@@ -175,7 +179,7 @@ const noop = () => {
 export default {
     mixins: [Emitter, Locale],
 
-    name: 'Dropselect',
+    name: 'DropSelector',
 
     componentName: 'ElSelect',
 
@@ -237,7 +241,7 @@ export default {
         noDataText: String,
         popperClass: {
             type: String,
-            default: 'drop-selector-menu'
+            default: 'dropselect-popper'
         },
         placeholder: {
             type: String,
@@ -930,21 +934,21 @@ export default {
 </script>
 
 <style lang="scss">
-.drop-selector-menu {
-  z-index: 9999 !important;
+.dropselect-popper {
+    z-index: 9999 !important;
 
-  .el-select-dropdown__item {
-    list-style: none;
-  }
+    .el-select-dropdown__item {
+        list-style: none;
+    }
 
-  .el-select-dropdown__empty {
-    padding: 10px 0;
-    margin: 0;
-    color: #999;
-    font-size: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+    .el-select-dropdown__empty {
+        padding: 10px 0;
+        margin: 0;
+        color: #999;
+        font-size: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
 </style>

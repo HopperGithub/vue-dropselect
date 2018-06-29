@@ -150,9 +150,9 @@
  * Slot: （内容分发）
  *   支持 menu slot 功能，如静态选项：全部。
  *   举个栗子： totalItem = {id: '', name: '全部’}
- *   <drop-selector v-model="modelObj" :promise="listPromise">
+ *   <dropselect v-model="modelObj" :promise="listPromise">
  *       <el-option label="全部" :value="totalItem"></el-option>
- *   </drop-selector>
+ *   </dropselect>
  */
 
 import ElSelectMenu from './menu.vue';
@@ -179,7 +179,7 @@ const noop = () => {
 export default {
     mixins: [Emitter, Locale],
 
-    name: 'DropSelector',
+    name: 'Dropselect',
 
     componentName: 'ElSelect',
 

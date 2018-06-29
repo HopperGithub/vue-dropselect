@@ -3,7 +3,14 @@
 import Vue from 'vue'
 import App from './App'
 
+import ElementUI from 'element-ui'
+
+import Dropselect from './dropselect'
+
 Vue.config.productionTip = false
+
+Vue.use(ElementUI)
+Vue.use(Dropselect)
 
 /* eslint-disable no-new */
 new Vue({

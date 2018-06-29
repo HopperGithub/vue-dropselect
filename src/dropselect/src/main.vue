@@ -47,10 +47,11 @@
                 <el-input ref="search"
                           style="padding: 8px"
                           type="text"
+                          class="search-input"
                           v-if="filterable"
                           v-model.trim="search"
                           :disabled="disabled"
-                          :placeholder="$t('el.transfer.filterPlaceholder')"
+                          :placeholder="t('el.transfer.filterPlaceholder')"
                           :icon="searchIconClass"
                           :validate-event="false"
                           :on-icon-click="searchChange"
@@ -163,7 +164,6 @@ import Clickoutside from 'element-ui/src/utils/clickoutside';
 import debounce from 'throttle-debounce/debounce';
 import { addClass, removeClass, hasClass } from 'element-ui/src/utils/dom';
 import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
-//    import {t} from 'element-ui/src/locale';
 import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
 import { getValueByPath } from 'element-ui/src/utils/util';
 
@@ -206,13 +206,13 @@ export default {
 
         emptyText () {
             if (this.loading) {
-                return this.loadingText || this.$t('el.select.loading');
+                return this.loadingText || this.t('el.select.loading');
             } else {
                 if (this.filterable && this.options.length > 0 && this.filteredOptionsCount === 0) {
-                    return this.noMatchText || this.$t('el.select.noMatch');
+                    return this.noMatchText || this.t('el.select.noMatch');
                 }
                 if (this.options.length === 0 || this.list.length === 0) {
-                    return this.noDataText || this.$t('el.select.noData');
+                    return this.noDataText || this.t('el.select.noData');
                 }
             }
             return null;
@@ -246,7 +246,7 @@ export default {
         placeholder: {
             type: String,
             default () {
-                return this.$t('el.select.placeholder');
+                return this.t('el.select.placeholder');
             }
         },
         multipleLimit: {
@@ -949,6 +949,9 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+    .search-input {
+        width: calc(100% - 16px);
     }
 }
 </style>

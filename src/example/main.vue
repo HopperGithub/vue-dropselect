@@ -1,6 +1,7 @@
 <template>
     <dropselect v-model="status"
                 placeholder="请选择一个状态"
+                class="dropselect"
                 :remote="false"
                 :promise="statusPromise">
         <el-option label="全部"
@@ -24,19 +25,18 @@ export default {
     },
     methods: {
         statusPromise (params) {
-            const { limit, offset } = params;
             // mock api http response 
-            return new Promise.resolve().then(() => {
-                const arrays = [
-                    { id: 'new', name: '新建' },
-                    { id: 'pending', name: '未启动' },
-                    { id: 'running', name: '运行中' },
-                    { id: 'paused', name: '已暂停' },
-                    { id: 'complete', name: '已完成' }
-                ];
+            const arrays = [
+                { id: 'new', name: '新建' },
+                { id: 'pending', name: '未启动' },
+                { id: 'running', name: '运行中' },
+                { id: 'paused', name: '已暂停' },
+                { id: 'complete', name: '已完成' }
+            ];
+            return Promise.resolve(arrays).then(data => {
                 return {
-                    data: arrays.slice(offset, limit + offset),
-                    total: arrays.length
+                    data: data,
+                    total: data.length
                 };
             });
         }

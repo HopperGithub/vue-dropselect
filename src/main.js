@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 
+import 'element-theme-default'
 import ElementUI from 'element-ui'
 
 import Dropselect from './dropselect'
@@ -14,7 +15,7 @@ Vue.use(Dropselect)
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  components: { App },
-  template: '<App/>'
+    el: '#app',
+    components: { App },
+    template: '<App/>'
 })
